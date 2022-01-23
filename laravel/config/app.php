@@ -232,6 +232,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        
+        
+        //オリジナル関数の登録
+        'Util' => App\Services\Util::class,
 
     ],
 
