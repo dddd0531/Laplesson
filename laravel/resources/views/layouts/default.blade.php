@@ -22,7 +22,6 @@ if (Util::ua_app() == true) {
     <meta name="keywords" content="@yield('keywords')">
     <meta name="description" content="@yield('description')" />
 
-
     <meta property="og:title"  content="@yield('title')" />
     <meta property="og:site_name" content="<?php echo Config::get('app.sitename');?>" >
     <meta property="og:description" content="@yield('description')">
@@ -56,14 +55,20 @@ if (Util::ua_app() == true) {
     <!-- iOS Safari and Chrome -->
     <meta name="apple-mobile-web-app-title" content="ラプレッスン">
     <link rel="apple-touch-icon" sizes="192x192" href="{{ asset('/image/apple-touch-icon.png') }}">
-
+<script src="{{ asset('/boost/js/bootstrap.min.js') }}"></script>
+    
+    <link rel="stylesheet" href="{{ asset('/boost/css/bootstrap.min.css') }}" type="text/css">
+	<link rel="stylesheet" href="{{ asset('/css/style.css?v1.0') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{{ asset('/css/modal-video.min.css') }}" type="text/css" >
+    
+    <!--
     <link rel="stylesheet" href="/boost/css/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="/css/style.css?v1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 	<link rel="stylesheet" href="/css/modal-video.min.css" type="text/css" >
 
-
+-->
 
     @yield('canonical')
 
@@ -128,11 +133,12 @@ if (Util::ua_app() == true) {
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/boost/js/bootstrap.min.js"></script>
-<script src="/js/jquery.scrolltrigger.js"></script>
-<script src="/js/works.js"></script>
-<script src="/js/modal-video.js"></script>
+<script src="{{ asset('/boost/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('/js/jquery.scrolltrigger.js') }}"></script>
+<script src="{{ asset('/js/works.js') }}"></script>
+<script src="{{ asset('/js/modal-video.js') }}"></script>
 
+    
 <script type="text/javascript">
   //google analytics
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
