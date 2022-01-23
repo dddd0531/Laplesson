@@ -161,19 +161,18 @@ Route::group(['middleware' => ['auth:users']], function () {//この書き方が
 | 管理画面関連
 |--------------------------------------------------------------------------
 */
-use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\CategoriesController;
 
 
-Route::get('/admin/login', [AuthController::class, 'getLogin']);
-Route::post('/admin/login', [AuthController::class, 'postLogin']);
-Route::get('/admin/logout', [AuthController::class, 'getLogout']);
+Route::get('/admin/login', [admin\AuthController::class, 'getLogin']);
+Route::post('/admin/login', [admin\AuthController::class, 'postLogin']);
+Route::get('/admin/logout', [admin\AuthController::class, 'getLogout']);
 
 Route::group(['middleware' => ['auth:admin']], function () {
     
     //管理者登録
-    Route::get('/admin/register', [AuthController::class, 'getRegister']);
-    Route::post('/admin/register', [AuthController::class, 'postRegister']);
+    Route::get('/admin/register', [admin\AuthController::class, 'getRegister']);
+    Route::post('/admin/register', [admin\AuthController::class, 'postRegister']);
 
     //ホーム画面
     Route::get('/admin/home', [PostsController::class, 'home']);
