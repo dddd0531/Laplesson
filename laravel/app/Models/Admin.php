@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Carbon\Carbon; // 追加 登録時のメール認証
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -13,11 +13,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'todofu', 'password',
+        'name', 'email', 'password',
     ];
 
     /**
-     * The attributes excluded from the model's JSON form.
+     * The attributes that should be hidden for arrays.
      *
      * @var array
      */
@@ -26,13 +26,6 @@ class User extends Authenticatable
 		'confirmation_token', 'confirmed_at', 'confirmation_sent_at'
     ];
 	
-    public function study()
-    {
-        return $this->hasMany('App\Study');
-    }	
-
-
-
     /**
      * 登録時のメール認証
      *
@@ -62,5 +55,5 @@ class User extends Authenticatable
     public function isConfirmed() { 
         return ! empty($this->confirmed_at);
     }
-	
+		
 }
