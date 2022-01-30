@@ -7,7 +7,6 @@ if (Util::ua_app() == true) {
 	//echo 'アプリじゃない<br>！'.$_SERVER['HTTP_USER_AGENT'];;//それ以外の場合の処理
 }
 //アプリ判定////////////////////////?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# article: https://ogp.me/ns/article#">

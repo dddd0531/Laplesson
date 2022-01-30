@@ -1,5 +1,4 @@
 @extends('layouts.default')
-
 @section('title'){{ Config::get('app.sitename')}}@endsection
 @section('description'){{ Config::get('app.description')}}@endsection
 @section('keywords'){{ Config::get('app.keywords')}}@endsection
