@@ -211,7 +211,7 @@ if (Util::ua_app() == true) {
                 	<ul>
                     @forelse ($news as $new)
                     	<?php $date = date_format($new->created_at , 'Y.m.d');?>
-                		<li><?php echo $date;?>　<a href="{{ action('NewsController@newsshow', $new->id) }}">{{ $new->title }} <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></li>
+                		<li><?php echo $date;?>　<a href="{{ route('news.show', $new->id) }}">{{ $new->title }} <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></li>
                     @empty 
                     	<li>お知らせはありません。</li>
                     @endforelse                        
