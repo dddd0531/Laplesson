@@ -251,20 +251,20 @@ if (Util::ua_app() == true) {
 	    	<p class="font09">{!! nl2br(e($post->body)) !!}</p>
             <div class="space10"></div>
             <!--関連動画-->
-                @if ( isset($refer1))
+                @if ( !empty($refer1))
                 <div class="space10"></div>
                 <div class="list-group font08">
                         <a href="#" class="list-group-item active"><span class="label label-info">関連動画</span> つぎの動画も参考にしてください</a>
-                    @if(isset($refer1))
+                    @if(!empty($refer1))
                         <a href="/lesson/{!! $post->refer1 !!}" class="list-group-item">{!! $refer1->categories->category !!}　{!! $refer1->title !!}</a>
                     @endif
-                    @if(isset($refer2))
+                    @if(!empty($refer2))
                         <a href="/lesson/{!! $post->refer2 !!}" class="list-group-item">{!! $refer2->categories->category !!}　{!! $refer2->title !!}</a>
                     @endif
-                    @if(isset($refer3))
+                    @if(!empty($refer3))
                         <a href="/lesson/{!! $post->refer3 !!}" class="list-group-item">{!! $refer3->categories->category !!}　{!! $refer3->title !!}</a>
                     @endif
-                    @if(isset($refer4))
+                    @if(!empty($refer4))
                         <a href="/lesson/{!! $post->refer4 !!}" class="list-group-item">{!! $refer4->categories->category !!}　{!! $refer4->title !!}</a>
                     @endif
                 </div>
@@ -320,45 +320,7 @@ if (Util::ua_app() == true) {
 @endif
 @include('layouts.baner')
 
-<!--
-<div class="panel panel-default">
-<div class="panel-heading">Comments</div>
-<div class="panel-body">
-	<ul>
-		@forelse ($post->comments as $comment)
-		<li>
-			{{ $comment->body }}
-             <form action="{{ action('CommentsController@destroy', [$post->id,$comment->id]) }}" id="form_{{ $comment->id }}" method="post" style="display:inline">
-			    {{ csrf_field() }}
-			    {{ method_field('delete') }}
-			      <a href="#" data-id="{{ $comment->id }}" onclick="deleteComment(this);">×</a>
-			 </form>
-		</li>
-		@empty
-		<li>No Comment</li>
-		@endforelse
-	</ul>
 
-	<form class="form-horizontal" method="post" action="{{ action('CommentsController@store', $post->id) }}">
-	 {{ csrf_field() }}
-
-            <div class="form-group">
-              <label class="col-md-4 control-label">Add New Comment</label>
-              <div class="col-md-6">
-		  <input class="form-control" type="text" name="body" placeholder="body" value="{{ old('body') }}">
-		  @if ($errors->has('body'))
-		  <span class="error">{{ $errors->first('body') }}</span>
-		  @endif
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-6">
-			  <input class="btn btn-primary" type="submit" value="Add Comment">
-              </div>
-            </div>
-	</form>
-</div><!-- .panel-body -->
-<!--</div>--><!-- .panel -->
 
 </div><!--END　メインコンテンツ ############################################################-->
 
@@ -399,29 +361,29 @@ if (Util::ua_app() == true) {
             @if (Auth::guest() || !in_array($post2->id, $statues))
                 @if($post_id == $post2->id)
 
-                       <tr><td style="font-size:1.5em"><strong><span class="glyphicon glyphicon-arrow-right accent"></span></strong></td><td><a href="{{ action('PostsController@lessonshow', $post2->id) }}" class="accent"><strong>{{ $post2->title }}</strong></a></td></tr>
+                       <tr><td style="font-size:1.5em"><strong><span class="glyphicon glyphicon-arrow-right accent"></span></strong></td><td><a href="{{ route('lesson.show', $post2->id) }}" class="accent"><strong>{{ $post2->title }}</strong></a></td></tr>
                 @else
                     @if(Auth::guest())
                         @if ($post2->usersonly == 0)
-                            <tr><td style="font-size:1.5em"><span class="accent"><i class="fa fa-youtube-play"></i></span></td><td><a href="{{ action('PostsController@lessonshow', $post2->id) }}">{{ $post2->title }}</a></td></tr>
+                            <tr><td style="font-size:1.5em"><span class="accent"><i class="fa fa-youtube-play"></i></span></td><td><a href="{{ route('lesson.show',  $post2->id) }}">{{ $post2->title }}</a></td></tr>
                         @elseif ($post2->usersonly == 2)
 							<tr><td style="font-size:1.5em"></td><td><span class="gray">{{ $post2->title }}</span></td></tr>
                         @else
-                            <tr><td style="font-size:1.5em"><span class="accent"><i class="fa fa-lock gray"></i></span></td><td><a href="{{ action('PostsController@lessonshow', $post2->id) }}">{{ $post2->title }}</a></td></tr>
+                            <tr><td style="font-size:1.5em"><span class="accent"><i class="fa fa-lock gray"></i></span></td><td><a href="{{ route('lesson.show', $post2->id) }}">{{ $post2->title }}</a></td></tr>
                         @endif
                     @else
                         @if ($post2->usersonly == 2)
 							<tr><td style="font-size:1.5em"></td><td><span class="gray">{{ $post2->title }}</span></td></tr>
                          @else
-                            <tr><td style="font-size:1.5em"></td><td><a href="{{ action('PostsController@lessonshow', $post2->id) }}">{{ $post2->title }}</a></td></tr>
+                            <tr><td style="font-size:1.5em"></td><td><a href="{{ route('lesson.show', $post2->id) }}">{{ $post2->title }}</a></td></tr>
                          @endif
                     @endif
                 @endif
             @else
                 @if($post_id == $post2->id)
-                    <tr><td style="font-size:1.5em"><strong><span class="glyphicon glyphicon-arrow-right accent"></span></strong></td><td><a href="{{ action('PostsController@lessonshow', $post2->id) }}" class="lessonstudied"><strong>{{ $post2->title }}</strong></a></td></tr>
+                    <tr><td style="font-size:1.5em"><strong><span class="glyphicon glyphicon-arrow-right accent"></span></strong></td><td><a href="{{ route('lesson.show', $post2->id) }}" class="lessonstudied"><strong>{{ $post2->title }}</strong></a></td></tr>
                 @else
-                    <tr><td style="font-size:1.5em"><span class="glyphicon glyphicon-ok gray"></span></td><td><a href="{{ action('PostsController@lessonshow', $post2->id) }}" class="lessonstudied">{{ $post2->title }}</a></td></tr>
+                    <tr><td style="font-size:1.5em"><span class="glyphicon glyphicon-ok gray"></span></td><td><a href="{{ route('lesson.show', $post2->id) }}" class="lessonstudied">{{ $post2->title }}</a></td></tr>
                 @endif
             @endif
           <?php $i++;?>
