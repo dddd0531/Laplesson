@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\NewsRequest;
-use App\News;
-use App\Post;
-use App\Category;
-use App\Study;
-use App\User;
-use App\Access;
+use App\Models\News;
+use App\Models\Post;
+use App\Models\Category;
+use App\Models\Study;
+use App\Models\User;
+use App\Models\Access;
 use App\Http\Requests\PostRequest;
 use Auth;
 use DB;

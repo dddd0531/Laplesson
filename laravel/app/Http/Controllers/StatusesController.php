@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Status;
+use App\Models\Status;
 use App\Http\Requests\StatusRequest;
 
 class StatusesController extends Controller

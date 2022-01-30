@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Help;
+use App\Models\Help;
 
 
 class HelpController extends Controller

@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Post;
-use App\Category;
-use App\Study;
-use App\News;
-use App\User;
-use App\Access;
+use App\Models\Post;
+use App\Models\Category;
+use App\Models\Study;
+use App\Models\News;
+use App\Models\User;
+use App\Models\Access;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\EditRequest;
 use Auth;
@@ -37,7 +37,7 @@ class PostsController extends Controller
 		$categories = count($categories);
 
 		$news = News::where('open','=','1')->where('created_at','<=',Carbon::now())->take(3)->latest()->get();
-		return view('welcome', compact('catecount', 'posts', 'categories','news') );
+		return view('top', compact('catecount', 'posts', 'categories','news') );
 	}
 
 

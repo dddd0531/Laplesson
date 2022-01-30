@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Study;
-use App\Post;
+use App\Models\Study;
+use App\Models\Post;
 
 class StudiesController extends Controller
 {
