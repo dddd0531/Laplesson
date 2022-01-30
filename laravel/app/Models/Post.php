@@ -10,18 +10,18 @@ class Post extends Model
     
 
 	public function categories(){
-		return $this->belongsTo('App\Category','category_id');
+		return $this->belongsTo('App\Models\Category','category_id');
 	}
 
 		
 	public function comments(){
-		return $this->hasMany('App\Comment');
+		return $this->hasMany('App\Models\Comment');
 	}
 	
 
     public function studies()
     {
-        return $this->belongsToMany('App\Study')->withTimestamps();
+        return $this->belongsToMany('App\Models\Study')->withTimestamps();
     }	
 	
 }
