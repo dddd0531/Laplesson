@@ -128,7 +128,7 @@ Route::post('/lesson/{id}', [StudiesController::class, 'storeStatus']);
 use App\Http\Controllers\NewsController;
 
 //ニュース個別
-Route::get('/news/{id}', [NewsController::class, 'newsshow']);
+Route::get('/news/{id}', [NewsController::class, 'newsshow'])->name('news.show');
 
 //ニュース内フォーム
 Route::post('/newscontact', [NewsController::class, 'confirm']);
