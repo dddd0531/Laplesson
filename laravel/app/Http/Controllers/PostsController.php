@@ -209,10 +209,10 @@ class PostsController extends Controller
 		$post = Post::findOrFail($id);
 		$category = $post->category_id;
 		$posts = Post::where('category_id', '=', $category)->where('released', '=', '1')->orderBy('title','asc')->get();
-		if($post->refer1){$refer1 = Post::findOrFail($post->refer1);}
-		if($post->refer2){$refer2 = Post::findOrFail($post->refer2);}
-		if($post->refer3){$refer3 = Post::findOrFail($post->refer3);}
-		if($post->refer4){$refer4 = Post::findOrFail($post->refer4);}
+        $refer1 = "";if($post->refer1){$refer1 = Post::findOrFail($post->refer1);}
+		$refer2 = "";if($post->refer2){$refer2 = Post::findOrFail($post->refer2);}
+		$refer3 = "";if($post->refer3){$refer3 = Post::findOrFail($post->refer3);}
+		$refer4 = "";if($post->refer4){$refer4 = Post::findOrFail($post->refer4);}
 
 		//ページ送り
 		//post_idの一覧を配列にいれる
@@ -291,7 +291,6 @@ class PostsController extends Controller
 					->take(1)
 					->get();
 
-			//return view('posts.show',['post' => $post], ['statuses' => $statuses], ['study' => $study] );
 			return view( 'posts.lessonshow', compact('post', 'posts', 'study','studies','migakusyu','statues','next','prev','news','pickup_news','refer1','refer2','refer3','refer4') );
 
 		}else{
