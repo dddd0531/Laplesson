@@ -25,7 +25,6 @@ class NewsController extends Controller
 
 	public function newsshow($id){
 		$new1 = News::findOrFail($id);
-
 		$posts = Post::orderBy('title','asc')->get();
 		if (Auth::check()) {
 			$user = Auth::user();
@@ -82,8 +81,11 @@ class NewsController extends Controller
 
 		//公開済みのニュース
 		$news = News::where('open','=','1')->take(3)->latest()->get();
-
-		return view( 'posts.newsshow', compact('new1','categories','postcount','studies','studied','news','times','days') );
+		if (Auth::check()) {
+			return view( 'posts.newsshow', compact('new1','categories','postcount','studies','studied','news','times','days') );
+		}else{
+			return view( 'posts.newsshow', compact('new1','news') );
+		}
 
 	}
 
