@@ -49,7 +49,7 @@ if (Util::ua_app() == true) {
                 @forelse ($posts as $post)
                   <tr><td class="lessontitle <?php if($post->usersonly == 2){ echo "comingsoon"; } ?>">
 					@if ($post->usersonly != 2)				  
-						<a class="alink" href="{{ action('PostsController@lessonshow', $post->id) }}">  
+						<a class="alink" href="{{ route('lesson.show', $post->id) }}">  
 					@endif
                     <div class="pull-right">
                         @if ($post->usersonly != 2)<!--0:一般公開　1:会員限定　2:準備中 /////////////////-->

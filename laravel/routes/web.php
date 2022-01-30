@@ -110,7 +110,7 @@ Route::post('/lesson/access', [PostsController::class, 'access']);
 Route::get('/lesson', [PostsController::class, 'lesson']);
 
 //レッスン個別
-Route::get('/lesson/{id}', [PostsController::class, 'lessonshow']);
+Route::get('/lesson/{id}', [PostsController::class, 'lessonshow'])->name('lesson.show');
 
 //レッスンカテゴリー
 Route::get('/lesson/category/{category_id}', [PostsController::class, 'lessoncategory']);
