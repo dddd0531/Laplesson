@@ -106,8 +106,7 @@ if (Util::ua_app() == true) {
     <div class="btn-group btn-group-justified" role="group" aria-label="...">
     	<div class="btn-group" role="group">
 			<?php if($prev != 'first'){?>
-            	<!--<a href="{{ action('PostsController@lessonshow', $prev) }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left font20"></span><br><span class="pconly3">前へ</span></a>-->
-                <button type="button" onclick="location.href='{{ action('PostsController@lessonshow', $prev) }}'" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left font20"></span><br><span class="pconly3">前へ</span></button>
+                <button type="button" onclick="location.href='{{ route('lesson.show', $prev) }}'" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left font20"></span><br><span class="pconly3">前へ</span></button>
 			<?php }else{?>
                 <button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-chevron-left font20"></span><br><span class="pconly3">前へ</span></button>
 			<?php }?>
@@ -117,11 +116,9 @@ if (Util::ua_app() == true) {
         </div>
     	<div class="btn-group" role="group">
 			<?php if($next != 'last'){?>
-            	<!--<a href="{{ action('PostsController@lessonshow', $next) }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right font20"></span><br><span class="pconly3">次へ</span></a>-->
-                <button type="button" onclick="location.href='{{ action('PostsController@lessonshow', $next) }}'" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right font20"></span><br><span class="pconly3">次へ</span></button>
+                <button type="button" onclick="location.href='{{ route('lesson.show', $next) }}'" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right font20"></span><br><span class="pconly3">次へ</span></button>
 
 			<?php }else{?>
-                <!--<button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-chevron-right font20"></span><br><span class="pconly3">次へ</span></button>-->
                 <button style="color:#eee;" type="button" data-container="body" data-toggle="popover" data-html="true" data-placement="top" title="このレッスンの最後の動画です" data-content='他のレッスン動画を見るにはレッスン一覧に戻ってください。<br><a href="/lesson" class="btn btn-primary">レッスン一覧 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>' class="btn btn-default"><span class="glyphicon glyphicon-chevron-right font20"></span><br><span class="pconly3">次へ</span></button>
 			<?php }?>
 
