@@ -57,7 +57,7 @@ if (Util::ua_app() == true) {
 				<div class="space30"></div>
             @endif                  
                 
-          <form class="form-horizontal" role="form" method="POST" action="/auth/login">
+          <form class="form-horizontal" role="form" method="POST" action="{{ route('postLogin') }}">
             {{-- CSRF対策--}}
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group form-group-lg">

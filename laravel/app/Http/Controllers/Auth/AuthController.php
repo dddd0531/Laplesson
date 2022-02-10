@@ -2,32 +2,40 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use Validator;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginFormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-//Laravel8では不要　削除
+
+//Laravel8では不要　コメントアウト
 //use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers; 
 use Mail;
 
 // 追加　登録時のメール認証
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Contracts\Config\Repository as Config;
 
 class AuthController extends Controller
 {
     /**
-     * *
-     * *
-     *
      * @return View
      */
     public function getLogin()
     {
         return view('auth.login');
         
+    }
+
+    /**
+     * @param App\Http\Requests\LoginFormRequest;
+     * $request
+     */
+    public function postLogin(LoginFormRequest $request)
+    {
+        dd($request->all());
     }
 
     /*
@@ -48,8 +56,8 @@ class AuthController extends Controller
     | a simple trait to add these behaviors. Why don't you explore it?
     |
     */
-    
-    //Laravel8では不要　削除
+
+    //Laravel8では不要　コメントアウト
     //use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
 
@@ -67,12 +75,15 @@ class AuthController extends Controller
      *
      * @return void
      */
+    
+//Laravel8では不要　コメントアウト
+/*
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'getLogout']);
 		$this->middleware('confirm', ['only' => 'postLogin']);
     }
-
+*/
     /**
      * Get a validator for an incoming registration request.
      *
