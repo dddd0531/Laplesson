@@ -35,7 +35,7 @@ if (Util::ua_app() == true) {
       <div class="panel panel-default">
         <div class="panel-body">
         
-          @if (count($errors) > 0)
+          @if ($errors->any())
             <div class="alert alert-danger">
               <ul>
                 @foreach ($errors->all() as $error)
@@ -45,21 +45,21 @@ if (Util::ua_app() == true) {
             </div>
           @endif
           
-            @if (session('flash_info'))
+          @if (session('flash_info'))
                 <div class="alert alert-danger">
                     <strong><i class="fa fa-info-circle" aria-hidden="true"></i> {{ session('flash_info') }}</strong>
                 </div>
                 <p>{{ session('flash_info2') }}</p>
-				<div class="space20"></div>
+                <div class="space20"></div>
                 <p><a href="/help/1">{{ session('flash_info3') }} <i class="fa fa-external-link" aria-hidden="true"></i></a></p>
-				<div class="space10"></div>
+                <div class="space10"></div>
                 <div class="sepalator"></div>
-				<div class="space30"></div>
+                <div class="space30"></div>
             @endif                  
                 
           <form class="form-horizontal" role="form" method="POST" action="{{ route('postLogin') }}">
             {{-- CSRF対策--}}
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            @csrf
             <div class="form-group form-group-lg">
               <label class="col-md-4 control-label">メールアドレス</label>
               <div class="col-md-6">
