@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
-use Validator;
+//use App\Models\User;
+//use Validator;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginFormRequest;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Support\Facades\Auth;
+//use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 //Laravel8では不要　コメントアウト
 //use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers; 
@@ -35,7 +36,18 @@ class AuthController extends Controller
      */
     public function postLogin(LoginFormRequest $request)
     {
-        dd($request->all());
+        $credentials = $request->only('email','password');
+
+        //ログイン判定
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect('mypage');
+        }
+        //もしエラーの場合
+        return back()->withErrors([
+            'login_error' => 'アカウントが存在しないか、メールアドレスかパスワードが間違っています',
+        ]);
     }
 
     /*

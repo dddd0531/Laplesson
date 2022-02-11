@@ -70,11 +70,11 @@ Route::get('/help/{id}', [HelpController::class, 'helpshow']);
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordController;
 
-
 //ログイン
 Route::get('/auth/login', [AuthController::class, 'getLogin'])->name('getLogin');
 Route::post('/auth/login', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::get('/auth/confirm/{token}', [AuthController::class, 'getConfirm']);
+
 
 //ログアウト
 Route::get('/auth/logout', [AuthController::class, 'getLogout']);
@@ -93,6 +93,26 @@ Route::get('/password/email', [PasswordController::class, 'getEmail']);
 Route::post('/password/email', [PasswordController::class, 'postEmail']);
 Route::get('/password/reset/{token}', [PasswordController::class, 'getReset']);
 Route::post('/password/reset', [PasswordController::class, 'postReset']);
+
+
+
+/*
+|--------------------------------------------------------------------------
+| マイページ関連
+|--------------------------------------------------------------------------
+*/
+
+use App\Http\Controllers\user\UserController;
+
+Route::group(['middleware' => ['auth']], function () {//この書き方がLaravel8で合っているのか不明
+    Route::get('/mypage', [PostsController::class, 'mypage'])->name('mypage');
+    Route::get('/mypage/profile', [UserController::class, 'getProfile']);
+    Route::patch('/mypage/profile/name', [UserController::class, 'postName']);
+    Route::patch('/mypage/profile/avater', [UserController::class, 'postAvater']);
+    Route::patch('/mypage/profile/email', [UserController::class, 'postUpdate']);
+    Route::get('/mypage/confirm/{token}', [UserController::class, 'getConfirm']);
+    Route::post('/mypage/profile/passwordSetting', [UserController::class, 'passwordSettingExec']);
+});
 
 
 
@@ -136,24 +156,6 @@ Route::post('/newscontact/complete', [NewsController::class, 'complete']);
 Route::get('/newscontact/thanks', [NewsController::class, 'thanks']);
 
 
-
-/*
-|--------------------------------------------------------------------------
-| マイページ関連
-|--------------------------------------------------------------------------
-*/
-
-use App\Http\Controllers\user\UserController;
-
-Route::group(['middleware' => ['auth:users']], function () {//この書き方がLaravel8で合っているのか不明
-    Route::get('/mypage', [PostsController::class, 'mypage']);
-    Route::get('/mypage/profile', [UserController::class, 'getProfile']);
-    Route::patch('/mypage/profile/name', [UserController::class, 'postName']);
-    Route::patch('/mypage/profile/avater', [UserController::class, 'postAvater']);
-    Route::patch('/mypage/profile/email', [UserController::class, 'postUpdate']);
-    Route::get('/mypage/confirm/{token}', [UserController::class, 'getConfirm']);
-    Route::post('/mypage/profile/passwordSetting', [UserController::class, 'passwordSettingExec']);
-});
 
 
 /*
