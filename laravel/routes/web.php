@@ -104,7 +104,7 @@ Route::post('/password/reset', [PasswordController::class, 'postReset']);
 
 use App\Http\Controllers\user\UserController;
 
-Route::group(['middleware' => ['auth']], function () {//この書き方がLaravel8で合っているのか不明
+Route::group(['middleware' => ['auth:users']], function () {
     Route::get('/mypage', [PostsController::class, 'mypage'])->name('mypage');
     Route::get('/mypage/profile', [UserController::class, 'getProfile']);
     Route::patch('/mypage/profile/name', [UserController::class, 'postName']);

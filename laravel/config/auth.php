@@ -14,8 +14,9 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+         //'guard' => 'web',  //デフォルト
+         'guard' => 'users',
+         'passwords' => 'users',
     ],
 
     /*
@@ -36,10 +37,21 @@ return [
     */
 
     'guards' => [
+        /*
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        */
+        'users' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],		
+
     ],
 
     /*
@@ -64,7 +76,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],		
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -87,12 +102,29 @@ return [
     */
 
     'passwords' => [
+        /*
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
+        */
+        'users' => [
+            'provider' => 'users',
+            //'email' => 'auth.emails.password',
+      			'email' => ['text' => 'auth.emails.password'],
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'admin' => [
+            'provider' => 'admin',
+            'email' => 'user.auth.emails.password',
+            'table' => 'multiauth_password_resets',
+            'expire' => 60,
+        ],
+
     ],
 
     /*
