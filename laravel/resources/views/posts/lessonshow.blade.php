@@ -133,39 +133,6 @@ if (Util::ua_app() == true) {
         $migakusyu2 = $migakusyu-$studies;//未学習ステータスの総数
     ?>
 
-    <!--
-    <form id="statusbt" class="form-horizontal pull-left" method="post" action="{{ action('StudiesController@store', [$user_id,$post_id]) }}">
-     {{ csrf_field() }}
-     @if(isset($study) && $study->status == 1)
-      <input type="hidden" name="status" value="0">
-      <?php $status = 0;?>
-      @else
-      <input type="hidden" name="status" value="1">
-      <?php $status = 1;?>
-      @endif
-    <div class="btn-group btn-group-justified" role="group" aria-label="...">
-        <div class="btn-group" role="group">
-			<?php if($prev != 'first'){?>
-            	<a href="{{ action('PostsController@lessonshow', $prev) }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> 前へ</a>
-			<?php }else{?>
-                <button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-chevron-left"></span> 前へ</button>
-			<?php }?>        </div>
-    	<div class="btn-group" role="group">
-              @if(isset($study) && $study->status == 1)
-              	<button type="submit" class="btn btn-default btn-complete"><span class="glyphicon glyphicon-save"></span> 学習済み</button>
-              @else
-              	<button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-save"></span> 学習完了</button>
-              @endif
-        </div>
-    	<div class="btn-group" role="group">
-			<?php if($next != 'last'){?><a href="{{ action('PostsController@lessonshow', $next) }}" class="btn btn-default">次へ <span class="glyphicon glyphicon-chevron-right"></span></a>
-			<?php }else{?>
-                <button type="button" class="btn btn-default" disabled="disabled">次へ <span class="glyphicon glyphicon-chevron-right"></span></button>
-			<?php }?>
-        </div>
-    </div>
-    </form>
-    	-->
 
       @if(isset($study) && $study->status == 1)
 		  <?php $status = 0;?>
@@ -175,8 +142,7 @@ if (Util::ua_app() == true) {
     <div class="btn-group btn-group-justified" role="group" aria-label="...">
         <div class="btn-group" role="group">
 			<?php if($prev != 'first'){?>
-            	<!--<a href="{{ action('PostsController@lessonshow', $prev) }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left font20"></span><br><span class="pconly3">前へ</span></a>-->
-                <button type="button" onclick="location.href='{{ action('PostsController@lessonshow', $prev) }}'" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left font20"></span><br><span class="pconly3">前へ</span></button>
+                <button type="button" onclick="location.href='{{ route('lesson.show', $prev) }}'" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left font20"></span><br><span class="pconly3">前へ</span></button>
 			<?php }else{?>
                 <button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-chevron-left font20"></span><br><span class="pconly3">前へ</span></button>
 			<?php }?>        </div>
@@ -193,10 +159,8 @@ if (Util::ua_app() == true) {
         </div>
     	<div class="btn-group" role="group">
 			<?php if($next != 'last'){?>
-            	<!--<a href="{{ action('PostsController@lessonshow', $next) }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right font20"></span><br><span class="pconly3">次へ</span></a>-->
-                <button type="button" onclick="location.href='{{ action('PostsController@lessonshow', $next) }}'" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right font20"></span><br><span class="pconly3">次へ</span></button>
+                <button type="button" onclick="location.href='{{ route('lesson.show', $next) }}'" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right font20"></span><br><span class="pconly3">次へ</span></button>
 			<?php }else{?>
-                <!--<button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-chevron-right font20"></span><br><span class="pconly3">次へ</span></button>-->
                 <button style="color:#eee;" type="button" data-container="body" data-toggle="popover" data-html="true" data-placement="top" title="このレッスンの最後の動画です" data-content='他のレッスン動画を見るにはレッスン一覧に戻ってください。<br><a href="/lesson" class="btn btn-primary">レッスン一覧 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>' class="btn btn-default"><span class="glyphicon glyphicon-chevron-right font20"></span><br><span class="pconly3">次へ</span></button>
 			<?php }?>
         </div>
@@ -403,7 +367,7 @@ if (Util::ua_app() == true) {
 			<ul>
 			@forelse ($news as $new)
 				<?php $date = date_format($new->created_at , 'Y.m.d');?>
-				<li><span class="text-muted"><?php echo $date;?></span><br><a href="{{ action('NewsController@newsshow', $new->id) }}">{{ $new->title }} <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></li>
+				<li><span class="text-muted"><?php echo $date;?></span><br><a href="{{ route('news.show', $new->id) }}">{{ $new->title }} <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></li>
 			@empty
 				<li>お知らせはありません。</li>
 			@endforelse

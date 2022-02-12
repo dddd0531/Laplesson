@@ -112,6 +112,11 @@ Route::group(['middleware' => ['auth:users']], function () {
 
     //ログアウト
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+
+    //学習記録
+    Route::post('/lesson/{id}/{post}/study', [StudiesController::class, 'store']);
+    Route::post('/lesson/{id}', [StudiesController::class, 'storeStatus']);
 });
 
 
@@ -135,9 +140,6 @@ Route::get('/lesson/{id}', [PostsController::class, 'lessonshow'])->name('lesson
 //レッスンカテゴリー
 Route::get('/lesson/category/{category_id}', [PostsController::class, 'lessoncategory']);
 
-//学習記録
-Route::post('/lesson/{id}/{post}/study', [StudiesController::class, 'store']);
-Route::post('/lesson/{id}', [StudiesController::class, 'storeStatus']);
 
 
 /*
