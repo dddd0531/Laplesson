@@ -26,7 +26,7 @@ if (Util::ua_app() == true) {
                 <div class="col-sm-6 col-sm-offset-3">
                   <p>ラプレッスンは、歯科衛生士スキルを無料で学べるビギナーDH向けの動画学習サイトです。歯周病検査からSRPテクニックまで幅広く新人衛生士から、復習につかって頂けます。</p>
                 </div>
-                <!--col-->
+                col-->
               <!--</div>-->
               <!--row-->
               <div class="row text-center">
