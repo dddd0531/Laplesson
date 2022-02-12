@@ -76,9 +76,6 @@ Route::post('/auth/login', [AuthController::class, 'postLogin'])->name('postLogi
 Route::get('/auth/confirm/{token}', [AuthController::class, 'getConfirm']);
 
 
-//ログアウト
-Route::get('/auth/logout', [AuthController::class, 'getLogout']);
-
 //認証メール再送
 Route::get('/auth/resend', [AuthController::class, 'getResend']);
 Route::post('/auth/resend', [AuthController::class, 'postResend']);
@@ -112,6 +109,9 @@ Route::group(['middleware' => ['auth:users']], function () {
     Route::patch('/mypage/profile/email', [UserController::class, 'postUpdate']);
     Route::get('/mypage/confirm/{token}', [UserController::class, 'getConfirm']);
     Route::post('/mypage/profile/passwordSetting', [UserController::class, 'passwordSettingExec']);
+
+    //ログアウト
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 

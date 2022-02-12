@@ -49,7 +49,12 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="/mypage/profile">プロフィール</a></li>
-                            <li><a href="/auth/logout">ログアウト</a></li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <button class="btn btn-primary btn-block">ログアウト</button>
+                                </form>
+                            </li>
                         </ul>
                     </li>
                 @endif
