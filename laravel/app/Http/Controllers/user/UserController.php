@@ -133,19 +133,20 @@ protected $user;
 			$imagename = md5(sha1(uniqid(mt_rand(), true))).'.'.$image->getClientOriginalExtension();
 			$upload = $image->move('media', $imagename);
 
-			$user = User::find($this->user->id);
+			$currentUserId = Auth::user()->id;
+			$user = User::find($currentUserId);
 			$user->avater =  $imagename;
 			$user->save();
 
 			//画像加工
 			Image::make($upload)
-					  //リサイズ　高さは比率に合わせる
-					  ->resize(150, null, function ($constraint) {
-							$constraint->aspectRatio();
-						})
-					  //トリミング　中心から100pxずつ
-					  ->crop(100, 100)
-					  ->save();
+				//リサイズ　高さは比率に合わせる
+				->resize(150, null, function ($constraint) {
+					$constraint->aspectRatio();
+				})
+				//トリミング　中心から100pxずつ
+				->crop(100, 100)
+				->save();
 
 		   return redirect('/mypage/profile#avater')->with('flash_message','プロフィール画像が変更されました。');
 		}
