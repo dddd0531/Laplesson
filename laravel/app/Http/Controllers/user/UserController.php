@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Post;
-use App\Study;
-use App\Category;
-use App\News;
+use App\Models\User;
+use App\Models\Post;
+use App\Models\Study;
+use App\Models\Category;
+use App\Models\News;
 use Image;
 use Hash;
 use DB;
@@ -89,7 +89,7 @@ protected $user;
 		$news = News::where('open','=','1')->take(3)->latest()->get();
 
 
-		return view( 'posts.profile', compact('new1','categories','postcount','studies','studied','news','times','days','user') );
+		return view( 'posts.profile', compact('categories','postcount','studies','studied','news','times','days','user') );
 
     }
 
@@ -104,12 +104,11 @@ protected $user;
 		if( $validator->fails() ){
 		   return redirect('/mypage/profile')->with('flash_error','ニックネームを入力してください。');
 		}
-
-		$user = User::find($this->user->id);
+		$currentUserId = Auth::user()->id;
+		$user = User::find($currentUserId);
 		$user->name = $request->input('name');
 		$user->save();
-
-
+	
 	   return redirect('/mypage/profile')->with('flash_message','ニックネームが変更されました。');
     }
 
