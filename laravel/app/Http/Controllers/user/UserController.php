@@ -198,7 +198,7 @@ protected $user;
     */
     public function postEmail(Mailer $mailer, array $data, $app_key)
     {
-			$user = User::find($this->user->id);
+		$user = User::find(Auth::id());
 
 	    $user->makeConfirmationToken($app_key);
 	    $user->confirmation_sent_at = Carbon::now();
