@@ -39,9 +39,8 @@ class AuthController extends Controller
         $credentials = $request->only('email','password');
 
         //ログイン判定
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
-
             return redirect()->route('mypage');
         }
         //もしエラーの場合
@@ -61,7 +60,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('getLogin')->with('logout','ログアウトしました');
+        return redirect()->route('login')->with('logout','ログアウトしました');
     }
 
     /*
