@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-//use App\Models\User;
 //use Validator;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginFormRequest;
 use App\Http\Requests\RegisterFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 //use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 //Laravel8では不要　コメントアウト
@@ -92,7 +92,31 @@ class AuthController extends Controller
         \Session::flash('flash_info3', 'メールが届かない場合はこちら');
         return redirect('auth/login');
     }
-	
+
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return User
+     */
+    protected function create(Mailer $mailer, array $data, $app_key)
+    {
+     $user = new User;
+ 
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->todofu = $data['todofu'];
+        $user->password = bcrypt($data['password']);
+ 
+        $user->makeConfirmationToken($app_key);
+        $user->confirmation_sent_at = Carbon::now();
+ 
+        $user->save();
+ 
+        $this->sendConfirmMail($mailer, $user);
+ 
+        return $user;
+    }
 
 
 
@@ -167,6 +191,7 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
+    /*
     protected function create(Mailer $mailer, array $data, $app_key)
     {
      $user = new User;
@@ -185,7 +210,7 @@ class AuthController extends Controller
  
         return $user;
     }
-
+*/
 	 /**
      * 確認メールの送信
      *
