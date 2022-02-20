@@ -84,11 +84,6 @@ class AuthController extends Controller
      */
     public function postRegister(RegisterFormRequest $request, Mailer $mailer, Config $config)
     {
-        //バリデーション
-        if ($request->fails()) {
-            return redirect()->route('register')->withErrors($request);
-        }
- 
         $this->create($mailer, $request->all(), $config->get('app.key'));
  
         \Session::flash('flash_message', '仮登録を受け付けました。');
