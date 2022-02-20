@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Auth;
 //use Validator;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginFormRequest;
+use App\Http\Requests\RegisterFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 //use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -63,6 +64,45 @@ class AuthController extends Controller
         return redirect()->route('login')->with('logout','ログアウトしました');
     }
 
+    /**
+     * @return View
+     */
+    public function getRegister()
+    {
+        return view('auth.register');
+        
+    }
+	
+    /**
+     * ユーザー登録アクション
+     * バリデーションチェックを行い、ユーザーを作成する
+     *
+     * @param App\Http\Requests\RegisterFormRequest;
+     * @param Mailer $mailer
+     * @param Config $config
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postRegister(RegisterFormRequest $request, Mailer $mailer, Config $config)
+    {
+        //バリデーション
+        if ($request->fails()) {
+            return redirect()->route('register')->withErrors($request);
+        }
+ 
+        $this->create($mailer, $request->all(), $config->get('app.key'));
+ 
+        \Session::flash('flash_message', '仮登録を受け付けました。');
+        \Session::flash('flash_info', 'まだユーザー登録は完了しておりません。');
+        \Session::flash('flash_info2', '【ユーザー登録メール】を登録されたメールアドレスに送信しましたので、記載された手順で【本登録】を完了してください。');
+        \Session::flash('flash_info3', 'メールが届かない場合はこちら');
+        return redirect('auth/login');
+    }
+	
+
+
+
+
+
     /*
     |--------------------------------------------------------------------------
     　ここから下がLaravel5.2のコード
@@ -115,6 +155,7 @@ class AuthController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+    /*
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -123,7 +164,7 @@ class AuthController extends Controller
             'todofu' => 'required',
             'password' => 'required|confirmed|min:6',
         ]);
-    }
+    }*/
 
     /**
      * Create a new user instance after a valid registration.
@@ -251,6 +292,7 @@ $body .= "＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝�
      * @param Config $config
      * @return \Illuminate\Http\RedirectResponse
      */
+    /*
     public function postRegister(Request $request, Mailer $mailer, Config $config)
     {
         $validator = $this->validator($request->all());
@@ -269,7 +311,7 @@ $body .= "＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝�
         \Session::flash('flash_info3', 'メールが届かない場合はこちら');
         return redirect('auth/login');
     }
-	
+	*/
 
  	/**
      * ユーザーを確認済にする

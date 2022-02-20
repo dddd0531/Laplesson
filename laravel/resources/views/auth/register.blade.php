@@ -34,9 +34,9 @@ if (Util::ua_app() == true) {
             </div>
           @endif
  
-          <form class="form-horizontal" role="form" method="POST" action="/auth/register">
-            {{-- CSRF対策--}}
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <form class="form-horizontal" role="form" method="POST" action="{{ route('postRegister') }}">
+              {{-- CSRF対策--}}
+            @csrf
  
             <div class="form-group">
               <label class="col-md-4 control-label">ニックネーム</label>

@@ -81,8 +81,8 @@ Route::get('/auth/resend', [AuthController::class, 'getResend']);
 Route::post('/auth/resend', [AuthController::class, 'postResend']);
 
 //会員登録
-Route::get('/auth/register', [AuthController::class, 'getRegister']);
-Route::post('/auth/register', [AuthController::class, 'postRegister']);
+Route::get('/auth/register', [AuthController::class, 'getRegister'])->name('register');
+Route::post('/auth/register', [AuthController::class, 'postRegister'])->name('postRegister');
 
 
 //パスワードリセット
