@@ -100,7 +100,7 @@ Route::post('/password/reset', [PasswordController::class, 'postReset']);
 */
 
 use App\Http\Controllers\user\UserController;
-
+use App\Http\Controllers\StudiesController;
 Route::group(['middleware' => ['auth:users']], function () {
     Route::get('/mypage', [PostsController::class, 'mypage'])->name('mypage');
     Route::get('/mypage/profile', [UserController::class, 'getProfile']);
@@ -126,7 +126,7 @@ Route::group(['middleware' => ['auth:users']], function () {
 | レッスン関連
 |--------------------------------------------------------------------------
 */
-use App\Http\Controllers\StudiesController;
+
 
 //アクセスログ　 URLが/lesson/{id}と認識されるので、かならず//Postより前に記載すること
 Route::post('/lesson/access', [PostsController::class, 'access']);
@@ -138,7 +138,7 @@ Route::get('/lesson', [PostsController::class, 'lesson']);
 Route::get('/lesson/{id}', [PostsController::class, 'lessonshow'])->name('lesson.show');
 
 //レッスンカテゴリー
-Route::get('/lesson/category/{category_id}', [PostsController::class, 'lessoncategory']);
+Route::get('/lesson/category/{category_id}', [PostsController::class, 'lessoncategory'])->name('lessoncategory.show');
 
 
 
