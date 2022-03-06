@@ -71,7 +71,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordController;
 
 //ログイン
-Route::get('/auth/login', [AuthController::class, 'getLogin'])->name('getLogin');
+Route::get('/auth/login', [AuthController::class, 'getLogin'])->name('login');
 Route::post('/auth/login', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::get('/auth/confirm/{token}', [AuthController::class, 'getConfirm']);
 

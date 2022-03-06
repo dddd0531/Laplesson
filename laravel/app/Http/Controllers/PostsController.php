@@ -312,7 +312,6 @@ class PostsController extends Controller
 
 		$studyedcategory = array();
 		//カテゴリーごと学習完了数を取得
-		//$categories = Category::oldest('created_at')->get();
 		$categories = Category::orderBy('number','asc')->get();
 		//カテゴリーごとにループ
 		foreach($categories as $category){
@@ -398,7 +397,7 @@ class PostsController extends Controller
 		//ピックアップニュース
 		//$pickups = News::where('open','=','1')->where('pickup','=','1')->take(1)->latest()->get();
 
-		return view( 'posts.mypage', compact('categories','studied','studyedcategory','news','pickups','pickup_news','times','days') );
+		return view( 'posts.mypage', compact('categories','studied','studyedcategory','news','pickup_news','times','days') );
 	}
 
 
