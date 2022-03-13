@@ -41,7 +41,7 @@ class AuthController extends Controller
 
         //ログイン判定
         if (Auth::attempt($credentials, $request->remember)) {
-            $request->session()->regenerate();
+            $request->session()->regenerate();  
             return redirect()->route('mypage');
         }
         //もしエラーの場合
