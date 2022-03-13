@@ -114,6 +114,9 @@ Route::group(['middleware' => ['auth:users']], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 
+    //アクセスログ　 URLが/lesson/{id}と認識されるので、かならず//Postや学習記録より前に記載すること
+    Route::post('/lesson/access', [PostsController::class, 'access']);
+
     //学習記録
     Route::post('/lesson/{id}/{post}/study', [StudiesController::class, 'store']);
     Route::post('/lesson/{id}', [StudiesController::class, 'storeStatus']);
@@ -128,8 +131,6 @@ Route::group(['middleware' => ['auth:users']], function () {
 */
 
 
-//アクセスログ　 URLが/lesson/{id}と認識されるので、かならず//Postより前に記載すること
-Route::post('/lesson/access', [PostsController::class, 'access']);
 
 //レッスン一覧
 Route::get('/lesson', [PostsController::class, 'lesson']);

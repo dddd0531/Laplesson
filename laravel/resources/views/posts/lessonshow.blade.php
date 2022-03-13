@@ -605,86 +605,51 @@ if (Util::ua_app() == true) {
 
     	<?php $user_id = Auth::user()->id;?>
 
+        /*
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-Token' : $('meta[name=csrf-token]').attr('content')
+            }
+         });
+         */
+         $(function() {
+             //アクセスした時間を変数に格納
+             var starttime = new Date;
+     
+             //モバイル判定
+             var agent = navigator.userAgent;
+             if(agent.search(/iPhone/) != -1 || agent.search(/iPad/) != -1 || agent.search(/iPod/) != -1 || agent.search(/Android/) != -1){
+                 console.log('モバイルです。');
+                 //画面遷移、画面を閉じたときに起動する
+                 window.addEventListener("pagehide", function(){
+                    getAccesslog()
+                 });
+             }else{
+                 console.log('パソコンです。');
+                 //画面遷移、画面を閉じたときに起動する
+                $(window).on("beforeunload", function() {
+                    getAccesslog()
+                });
+             }
 
-	$.ajaxSetup({
-	   headers: {
-	   'X-CSRF-Token' : $('meta[name=_token]').attr('content')
-	   }
-	});
-    $(function() {
-        //アクセスした時間を変数に格納
-        var starttime = new Date;
-
-        //モバイル判定
-        var agent = navigator.userAgent;
-        if(agent.search(/iPhone/) != -1 || agent.search(/iPad/) != -1 || agent.search(/iPod/) != -1 || agent.search(/Android/) != -1){
-            console.log('モバイルです。');
-            //画面遷移、画面を閉じたときに起動する
-            window.addEventListener("pagehide", function(){
+             function getAccesslog(){
                 //DB登録
                 var now = '<?php echo $now; ?>';
                 var user_id = '<?php echo $user_id;?>';
                 var times = (new Date - starttime);
                 var url = '<?php echo $url;?>';
+                var token = $('meta[name="csrf-token"]').attr('content');
 
-                $.ajax({
-                    type: 'POST',
-                    async: false,       // ←非同期フラグにfalseをセット。画面遷移が完了してもデータを書き込むため
-                    url: '/lesson/access',
-                    //dataType: 'JSON',
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        user_id : user_id,
-                        now : now,
-                        times : times,
-                        url : url
-                    },
-                    //成功後の挙動
-                    success: function(data) {
-                        success: console.log('AccessLog added')
-                    },
-                    error: function(){
-                        console.log('AccessLog failed');
-                    }
-                });
-            });
-        }else{
-            console.log('パソコンです。');
-            //画面遷移、画面を閉じたときに起動する
-            $(window).on('beforeunload', function() {
-
-                //DB登録
-                var now = '<?php echo $now; ?>';
-                var user_id = '<?php echo $user_id;?>';
-                var times = (new Date - starttime);
-                var url = '<?php echo $url;?>';
-
-                $.ajax({
-                    type: 'POST',
-                    async: false,       // ←非同期フラグにfalseをセット。画面遷移が完了してもデータを書き込むため
-                    url: '/lesson/access',
-                    //dataType: 'JSON',
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        user_id : user_id,
-                        now : now,
-                        times : times,
-                        url : url
-                    },
-                    //成功後の挙動
-                    success: function(data) {
-                        success: console.log('AccessLog added')
-                        //$('div.subpage').prepend('<div class="space20"></div><div class="alert alert-success flash_message" onclick="this.classList.add("hidden")">成功 !!!</div>');
-                    },
-                    error: function(){
-                        console.log('更新失敗 !!!');
-                        //$('div.subpage').prepend('<div class="space20"></div><div class="alert alert-danger flash_message" onclick="this.classList.add("hidden")">失敗 !!!</div>');
-                    }
-                });
-            });
-        }
-
-    });
+                var data = new FormData();
+                data.append("_token", token);
+                data.append("user_id", user_id);
+                data.append("now", now);
+                data.append("times", times);
+                data.append("url", url);
+                navigator.sendBeacon("/lesson/access", data);
+            };
+     
+         });
     @endif
 
 @stop
