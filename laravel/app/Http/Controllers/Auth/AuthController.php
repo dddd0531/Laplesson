@@ -20,6 +20,8 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Contracts\Config\Repository as Config;
 
+
+
 class AuthController extends Controller
 {
     /**
@@ -28,7 +30,6 @@ class AuthController extends Controller
     public function getLogin()
     {
         return view('auth.login');
-        
     }
 
     /**
