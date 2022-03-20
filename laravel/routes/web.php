@@ -214,9 +214,9 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin/help', [HelpController::class, 'help']);
     Route::get('/admin/help/create', [HelpController::class, 'create']);
     Route::get('/admin/help/{id}', [HelpController::class, 'show']);
-    Route::get('/admin/help/{id}/edit', [HelpController::class, 'edit']);
+    Route::get('/admin/help/{id}/edit', [HelpController::class, 'edit'])->name('help.edit');
     Route::post('/admin/help', [HelpController::class, 'store']);
     Route::patch('/admin/help/{id}', [HelpController::class, 'update']);
-    Route::delete('/admin/help/{id}', [HelpController::class, 'destroy']);
+    Route::delete('/admin/help/{id}', [HelpController::class, 'destroy'])->name('help.destroy');
 
 });
