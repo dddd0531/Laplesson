@@ -204,10 +204,10 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin/news', [NewsController::class, 'news']);
     Route::get('/admin/news/create', [NewsController::class, 'create']);
     Route::get('/admin/news/{id}', [NewsController::class, 'show']);
-    Route::get('/admin/news/{id}/edit', [NewsController::class, 'edit']);
+    Route::get('/admin/news/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
     Route::post('/admin/news', [NewsController::class, 'store']);
     Route::patch('/admin/news/{id}', [NewsController::class, 'update']);
-    Route::delete('/admin/news/{id}', [NewsController::class, 'destroy']);
+    Route::delete('/admin/news/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
     
 
     //ヘルプ投稿
