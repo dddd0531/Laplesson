@@ -129,9 +129,6 @@ Route::group(['middleware' => ['auth:users']], function () {
 | レッスン関連
 |--------------------------------------------------------------------------
 */
-
-
-
 //レッスン一覧
 Route::get('/lesson', [PostsController::class, 'lesson']);
 
@@ -168,10 +165,9 @@ Route::get('/newscontact/thanks', [NewsController::class, 'thanks']);
 */
 use App\Http\Controllers\CategoriesController;
 
-
-Route::get('/admin/login', [admin\AuthController::class, 'getLogin']);
-Route::post('/admin/login', [admin\AuthController::class, 'postLogin']);
-Route::get('/admin/logout', [admin\AuthController::class, 'getLogout']);
+Route::get('/admin/login', [App\Http\Controllers\admin\AuthController::class, 'adminLogin'])->name('adminlogin');
+Route::post('/admin/login', [App\Http\Controllers\admin\AuthController::class, 'postLogin']);
+Route::get('/admin/logout', [App\Http\Controllers\admin\AuthController::class, 'getLogout']);
 
 Route::group(['middleware' => ['auth:admin']], function () {
     
@@ -183,17 +179,17 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin/home', [PostsController::class, 'home']);
 
     //レッスン投稿
-    Route::get('/admin/lesson', [PostsController::class, 'post']);
+    Route::get('/admin/lesson', [PostsController::class, 'post'])->name('adminLesson');
     Route::get('/admin/lesson/create', [PostsController::class, 'create']);
     Route::get('/admin/lesson/{id}', [PostsController::class, 'show']);
-    Route::get('/admin/lesson/{id}/edit', [PostsController::class, 'edit']);
+    Route::get('/admin/lesson/{id}/edit', [PostsController::class, 'edit'])->name('lesson.edit');
     Route::post('/admin/lesson', [PostsController::class, 'store']);
     Route::patch('/admin/lesson/{id}', [PostsController::class, 'update']);
-    Route::delete('/admin/lesson/{id}', [PostsController::class, 'destroy']);
+    Route::delete('/admin/lesson/{id}', [PostsController::class, 'destroy'])->name('lesson.destroy');
 
     //ユーザー関連
     Route::get('/admin/userslist', [UserController::class, 'allusers']);
-    Route::delete('/admin/userslist/{id}', [UserController::class, 'userdestroy']);
+    Route::delete('/admin/userslist/{id}', [UserController::class, 'userdestroy'])->name('user.destroy');
     Route::get('/admin/userslist/download', [UserController::class, 'userdownload']);
     
     //カテゴリー関連

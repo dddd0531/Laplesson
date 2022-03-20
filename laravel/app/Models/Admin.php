@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Carbon\Carbon;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
+    protected $guard = 'admin';
+    
     /**
      * The attributes that are mass assignable.
      *
