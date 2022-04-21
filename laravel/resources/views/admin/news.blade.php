@@ -18,8 +18,8 @@ News</h1>
                     <th>{{ $new->created_at}}</th>
                     <th>{{ $new->id }}</th>
                     <td>{{ $new->title }}</td>
-                    <td><a href="{{ action('NewsController@edit', $new->id) }}" class="btn btn-primary btn-xs">Edit</a></td> 
-                    <td><form action="{{ action('NewsController@destroy', $new->id) }}" id="form_{{ $new->id }}" method="post" style="display:inline">
+                    <td><a href="{{ route('news.edit', $new->id) }}" class="btn btn-primary btn-xs">Edit</a></td> 
+                    <td><form action="{{ route('news.destroy', $new->id) }}" id="form_{{ $new->id }}" method="post" style="display:inline">
                         {{ csrf_field() }}
                         {{ method_field('delete') }}
                           <a href="#" data-id="{{ $new->id }}" onclick="deletePost(this);">×</a>

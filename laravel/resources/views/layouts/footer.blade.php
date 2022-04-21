@@ -98,7 +98,7 @@ a.lptbanner img:hover{
     </div>
     <!-- footer-body -->
     <div class="footer-bottom">
-        <span class="pull-left"><a href="/admin/lesson">サイト管理</a></span>
+        <span class="pull-left"><a href="/admin/login">サイト管理</a></span>
         <span class="pull-right">&copy; LAPLESSON.</span>
     </div><!--footer-bottom-->
 

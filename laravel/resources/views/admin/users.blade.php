@@ -19,7 +19,7 @@ users</h1>
 			   	<td>{{ $user->todofu }}</td>
 			   	<td>{{ $user->email }}</td>
 			 	<td>
-					<form action="{{ action('user\UserController@userdestroy', $user->id) }}" id="form_{{ $user->id }}" method="post" style="display:inline">
+					<form action="{{ route('user.destroy', $user->id) }}" id="form_{{ $user->id }}" method="post" style="display:inline">
 					    {{ csrf_field() }}
 					    {{ method_field('delete') }}
 					      <a href="#" data-id="{{ $user->id }}" onclick="deleteUser(this);">[delete]</a>

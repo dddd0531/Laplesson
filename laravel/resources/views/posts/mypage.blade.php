@@ -18,7 +18,7 @@ if (Util::ua_app() == true) {
                 <div class="alert alert-success font09" role="alert" style="margin-bottom:10px;padding:10px;">
                   <div>
                 @foreach ($pickup_news as $pickup_new)
-                      <i class="fa fa-info-circle" aria-hidden="true"></i> <?php echo date_format(date_create($pickup_new->created_at), "Y.m.d");?>　<a href="{{ action('NewsController@newsshow', $pickup_new->id) }}">{{ $pickup_new->title }}</a>　未読
+                      <i class="fa fa-info-circle" aria-hidden="true"></i> <?php echo date_format(date_create($pickup_new->created_at), "Y.m.d");?>　<a href="{{ route('news.show', $pickup_new->id) }}">{{ $pickup_new->title }}</a>　未読
                       @if($pickup_new !== end($pickup_news))
                       	<div class="sepa"></div>
                       @endif

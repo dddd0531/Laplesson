@@ -13,7 +13,9 @@ if (Util::ua_app() == true) {
 
 	<meta charset="utf-8">
     <!--laravelでajaxを使うために必要-->
-    <meta name="_token" content="{!! csrf_token() !!}"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

@@ -114,6 +114,9 @@ Route::group(['middleware' => ['auth:users']], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 
+    //アクセスログ　 URLが/lesson/{id}と認識されるので、かならず//Postや学習記録より前に記載すること
+    Route::post('/lesson/access', [PostsController::class, 'access']);
+
     //学習記録
     Route::post('/lesson/{id}/{post}/study', [StudiesController::class, 'store']);
     Route::post('/lesson/{id}', [StudiesController::class, 'storeStatus']);
@@ -126,11 +129,6 @@ Route::group(['middleware' => ['auth:users']], function () {
 | レッスン関連
 |--------------------------------------------------------------------------
 */
-
-
-//アクセスログ　 URLが/lesson/{id}と認識されるので、かならず//Postより前に記載すること
-Route::post('/lesson/access', [PostsController::class, 'access']);
-
 //レッスン一覧
 Route::get('/lesson', [PostsController::class, 'lesson']);
 
@@ -167,10 +165,9 @@ Route::get('/newscontact/thanks', [NewsController::class, 'thanks']);
 */
 use App\Http\Controllers\CategoriesController;
 
-
-Route::get('/admin/login', [admin\AuthController::class, 'getLogin']);
-Route::post('/admin/login', [admin\AuthController::class, 'postLogin']);
-Route::get('/admin/logout', [admin\AuthController::class, 'getLogout']);
+Route::get('/admin/login', [App\Http\Controllers\admin\AuthController::class, 'adminLogin'])->name('adminlogin');
+Route::post('/admin/login', [App\Http\Controllers\admin\AuthController::class, 'postLogin']);
+Route::get('/admin/logout', [App\Http\Controllers\admin\AuthController::class, 'getLogout']);
 
 Route::group(['middleware' => ['auth:admin']], function () {
     
@@ -182,17 +179,17 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin/home', [PostsController::class, 'home']);
 
     //レッスン投稿
-    Route::get('/admin/lesson', [PostsController::class, 'post']);
+    Route::get('/admin/lesson', [PostsController::class, 'post'])->name('adminLesson');
     Route::get('/admin/lesson/create', [PostsController::class, 'create']);
     Route::get('/admin/lesson/{id}', [PostsController::class, 'show']);
-    Route::get('/admin/lesson/{id}/edit', [PostsController::class, 'edit']);
+    Route::get('/admin/lesson/{id}/edit', [PostsController::class, 'edit'])->name('lesson.edit');
     Route::post('/admin/lesson', [PostsController::class, 'store']);
     Route::patch('/admin/lesson/{id}', [PostsController::class, 'update']);
-    Route::delete('/admin/lesson/{id}', [PostsController::class, 'destroy']);
+    Route::delete('/admin/lesson/{id}', [PostsController::class, 'destroy'])->name('lesson.destroy');
 
     //ユーザー関連
     Route::get('/admin/userslist', [UserController::class, 'allusers']);
-    Route::delete('/admin/userslist/{id}', [UserController::class, 'userdestroy']);
+    Route::delete('/admin/userslist/{id}', [UserController::class, 'userdestroy'])->name('user.destroy');
     Route::get('/admin/userslist/download', [UserController::class, 'userdownload']);
     
     //カテゴリー関連
@@ -207,19 +204,19 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin/news', [NewsController::class, 'news']);
     Route::get('/admin/news/create', [NewsController::class, 'create']);
     Route::get('/admin/news/{id}', [NewsController::class, 'show']);
-    Route::get('/admin/news/{id}/edit', [NewsController::class, 'edit']);
+    Route::get('/admin/news/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
     Route::post('/admin/news', [NewsController::class, 'store']);
     Route::patch('/admin/news/{id}', [NewsController::class, 'update']);
-    Route::delete('/admin/news/{id}', [NewsController::class, 'destroy']);
+    Route::delete('/admin/news/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
     
 
     //ヘルプ投稿
     Route::get('/admin/help', [HelpController::class, 'help']);
     Route::get('/admin/help/create', [HelpController::class, 'create']);
     Route::get('/admin/help/{id}', [HelpController::class, 'show']);
-    Route::get('/admin/help/{id}/edit', [HelpController::class, 'edit']);
+    Route::get('/admin/help/{id}/edit', [HelpController::class, 'edit'])->name('help.edit');
     Route::post('/admin/help', [HelpController::class, 'store']);
     Route::patch('/admin/help/{id}', [HelpController::class, 'update']);
-    Route::delete('/admin/help/{id}', [HelpController::class, 'destroy']);
+    Route::delete('/admin/help/{id}', [HelpController::class, 'destroy'])->name('help.destroy');
 
 });

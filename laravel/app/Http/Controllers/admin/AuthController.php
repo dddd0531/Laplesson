@@ -2,15 +2,30 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Admin;
-use App\User;
-use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\Http\Requests\LoginFormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Admin;
+
+
+//Laravel8では不要　コメントアウト
+//use Illuminate\Foundation\Auth\ThrottlesLogins;
+//use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
+
+    /**
+     * @return View
+     */
+    public function adminLogin()
+    {
+        return view('admin.login', ['authgroup' => 'admin']);
+    }
+
+
+
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -21,8 +36,8 @@ class AuthController extends Controller
     | a simple trait to add these behaviors. Why don't you explore it?
     |
     */
-
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    //Laravel8では不要　コメントアウト
+    //use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
      * Where to redirect users after login / registration.
@@ -43,9 +58,27 @@ class AuthController extends Controller
     public function __construct()
     {
         //$this->middleware('guest', ['except' => 'getLogout']);
-		$this->middleware('guest:admin', ['except' => 'getLogout']);
+		//$this->middleware('guest:admin', ['except' => 'getLogout']);
+        $this->middleware('guest:admin')->except('logout');
     }
 
+    public function postLogin(LoginFormRequest $request)
+    {
+        $credentials = $request->only('email','password');
+
+        //ログイン判定
+        if (Auth::guard('admin')->attempt($credentials, $request->remember)) {
+            $request->session()->regenerate();  
+            return redirect()->route('adminLesson');
+        }
+        //もしエラーの場合
+        return back()->withErrors([
+            'login_error' => 'アカウントが存在しないか、メールアドレスかパスワードが間違っています',
+        ]);
+    }
+
+
+    
     /**
      * Get a validator for an incoming registration request.
      *

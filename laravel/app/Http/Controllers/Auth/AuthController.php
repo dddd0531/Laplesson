@@ -20,6 +20,8 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Contracts\Config\Repository as Config;
 
+
+
 class AuthController extends Controller
 {
     /**
@@ -28,7 +30,6 @@ class AuthController extends Controller
     public function getLogin()
     {
         return view('auth.login');
-        
     }
 
     /**
@@ -41,7 +42,7 @@ class AuthController extends Controller
 
         //ログイン判定
         if (Auth::attempt($credentials, $request->remember)) {
-            $request->session()->regenerate();
+            $request->session()->regenerate();  
             return redirect()->route('mypage');
         }
         //もしエラーの場合

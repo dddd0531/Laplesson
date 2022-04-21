@@ -18,8 +18,8 @@ Help</h1>
                     <th>{{ $help->id }}</th>
                     <td>{{ $help->question }}</td>
                     <td>{{ $help->answer }}</td>
-                    <td><a href="{{ action('HelpController@edit', $help->id) }}" class="btn btn-primary btn-xs">Edit</a></td> 
-                    <td><form action="{{ action('HelpController@destroy', $help->id) }}" id="form_{{ $help->id }}" method="post" style="display:inline">
+                    <td><a href="{{ route('help.edit', $help->id) }}" class="btn btn-primary btn-xs">Edit</a></td> 
+                    <td><form action="{{ route('help.destroy', $help->id) }}" id="form_{{ $help->id }}" method="post" style="display:inline">
                         {{ csrf_field() }}
                         {{ method_field('delete') }}
                           <a href="#" data-id="{{ $help->id }}" onclick="deletePost(this);">×</a>
