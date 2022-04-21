@@ -32,9 +32,7 @@
         <div class="col-sm-6">
         	<div class="space50 pconly"></div>
         	<div class="space20"></div>
-        	<div id="pageplugin">
-            <div class="fb-page" data-href="https://www.facebook.com/laplesson.forDH/" data-tabs="timeline" data-width="500" data-height="350" data-small-header="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/laplesson.forDH/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/laplesson.forDH/">ラプレッスン</a></blockquote></div>
-            </div>
+
 
         </div><!--col-->
      </div><!--row-->

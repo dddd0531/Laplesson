@@ -178,6 +178,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * 画像処理ライブラリ Intervention Image
+         */
+        Intervention\Image\ImageServiceProvider::class,
+
     ],
 
     /*
@@ -234,7 +239,14 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         
         
-        //オリジナル関数の登録
+        /*
+         * 画像処理ライブラリ Intervention Image
+         */
+		'Image' => Intervention\Image\Facades\Image::class,
+
+        /*
+         * オリジナル関数の登録
+         */
         'Util' => App\Services\Util::class,
 
     ],

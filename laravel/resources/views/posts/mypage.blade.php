@@ -76,10 +76,10 @@ if (Util::ua_app() == true) {
                                    <?php if($category["studies"] != 0){ $num = round($category["studies"]/$category["postcount"]*100); ?>
                                     <div class="row">
                                         <div class="col-xs-2">
-                                            <a href="{{ action('PostsController@lessoncategory', $category["id"]) }}"><img class="lessonicon lessonicon{{ $category["id"] }}" src="/image/lesson{{ $category["id"] }}.png" alt="{{ $category["category"] }}"></a>
+                                            <a href="{{ route('lessoncategory.show', $category["id"]) }}"><img class="lessonicon lessonicon{{ $category["id"] }}" src="/image/lesson{{ $category["id"] }}.png" alt="{{ $category["category"] }}"></a>
                                         </div>
                                         <div class="col-sm-7 col-xs-10">
-                                            <h4><a href="{{ action('PostsController@lessoncategory', $category["id"]) }}">{{ $category["category"] }}</a>　<br class="mobileonly2">全{{ $category["postcount"] }}回</h4>
+                                            <h4><a href="{{ route('lessoncategory.show', $category["id"]) }}">{{ $category["category"] }}</a>　<br class="mobileonly2">全{{ $category["postcount"] }}回</h4>
                                             <div class="progress">
                                             	<?php if($num == 100){?>
                                                   <div class="progress-bar progress-bar-striped lessonicon{{ $category["id"] }}" role="progressbar" aria-valuenow="<?php echo $num;?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $num;?>%;">
@@ -96,9 +96,9 @@ if (Util::ua_app() == true) {
                                         </div>
                                         <div class="col-xs-3 pconly">
 											<?php if($num == 100){?>
-                                                    <a href="{{ action('PostsController@lessoncategory', $category["id"]) }}" class="btn btn-default pull-right">もう一度 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                                    <a href="{{ route('lessoncategory.show', $category["id"]) }}" class="btn btn-default pull-right">もう一度 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                                                 <?php }else{?>
-                                                    <a href="{{ action('PostsController@lessoncategory', $category["id"]) }}" class="btn btn-warning pull-right">つづき <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                                    <a href="{{ route('lessoncategory.show', $category["id"]) }}" class="btn btn-warning pull-right">つづき <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                                               	<?php } ?>
                                         </div>
                                     </div>

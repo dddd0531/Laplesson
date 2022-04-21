@@ -42,7 +42,7 @@ if (Util::ua_app() == true) {
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="namepage">
         <form class="form-horizontal" method="post" action="/mypage/profile/name">
-          {{ csrf_field() }}
+          @csrf
           {{ method_field('patch') }}
           <div class="form-group">
             <div class="col-md-10 col-md-offset-2">
@@ -58,7 +58,7 @@ if (Util::ua_app() == true) {
       </div>
         <div role="tabpanel" class="tab-pane" id="avaterpage">
         <form class="form-horizontal" method="post" action="/mypage/profile/avater" enctype="multipart/form-data">
-          {{ csrf_field() }}
+          @csrf
           {{ method_field('patch') }}
           <p>プロフィール画像を変更するには、以下からアップロードしてください。</p>
           <div class="form-group">
@@ -79,7 +79,7 @@ if (Util::ua_app() == true) {
       <div role="tabpanel" class="tab-pane" id="emailpage">
         <!-- <form class="form-horizontal" method="post" action="{{ url('/mypage/profile/', $user->id) }}"> -->
         <form class="form-horizontal" method="post" action="/mypage/profile/email">
-          {{ csrf_field() }}
+          @csrf
           {{ method_field('patch') }}
           <div class="form-group">
             <div class="col-md-10 col-md-offset-2">
@@ -106,8 +106,7 @@ if (Util::ua_app() == true) {
         <form class="form-horizontal" method="post" action="{{ url('/mypage/profile/passwordSetting') }}">
         パスワードを変更するには、必要な項目を記入して変更してください。
         <div class="space20"></div>
-          {{-- CSRF対策--}}
-          {{ csrf_field() }}
+          @csrf
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="form-group">
             <label class="col-md-4 control-label">現在のパスワード</label>
@@ -174,7 +173,7 @@ if (Util::ua_app() == true) {
                 <ul>
                 @forelse ($news as $new)
                     <?php $date = date_format($new->created_at , 'Y.m.d');?>
-                    <li><?php echo $date;?>　<a href="{{ action('NewsController@newsshow', $new->id) }}">{{ $new->title }}</a></li>
+                    <li><?php echo $date;?>　<a href="{{ route('news.show', $new->id) }}">{{ $new->title }}</a></li>
                 @empty
                     <li>お知らせはありません。</li>
                 @endforelse

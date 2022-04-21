@@ -711,12 +711,15 @@ div.space50{
 }
 .navbar-nav>li>a{
     color: #4a4a4a;
-
 }
 
 .navbar li.active a{
     color: #FB7968;
 	color: #f38273;
+}
+
+.navbar .dropdown-menu>li>a{
+	text-align: center;
 }
 
 .navbar-toggle{

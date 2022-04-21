@@ -76,16 +76,13 @@ Route::post('/auth/login', [AuthController::class, 'postLogin'])->name('postLogi
 Route::get('/auth/confirm/{token}', [AuthController::class, 'getConfirm']);
 
 
-//ログアウト
-Route::get('/auth/logout', [AuthController::class, 'getLogout']);
-
 //認証メール再送
 Route::get('/auth/resend', [AuthController::class, 'getResend']);
 Route::post('/auth/resend', [AuthController::class, 'postResend']);
 
 //会員登録
-Route::get('/auth/register', [AuthController::class, 'getRegister']);
-Route::post('/auth/register', [AuthController::class, 'postRegister']);
+Route::get('/auth/register', [AuthController::class, 'getRegister'])->name('register');
+Route::post('/auth/register', [AuthController::class, 'postRegister'])->name('postRegister');
 
 
 //パスワードリセット
@@ -103,7 +100,7 @@ Route::post('/password/reset', [PasswordController::class, 'postReset']);
 */
 
 use App\Http\Controllers\user\UserController;
-
+use App\Http\Controllers\StudiesController;
 Route::group(['middleware' => ['auth:users']], function () {
     Route::get('/mypage', [PostsController::class, 'mypage'])->name('mypage');
     Route::get('/mypage/profile', [UserController::class, 'getProfile']);
@@ -112,6 +109,14 @@ Route::group(['middleware' => ['auth:users']], function () {
     Route::patch('/mypage/profile/email', [UserController::class, 'postUpdate']);
     Route::get('/mypage/confirm/{token}', [UserController::class, 'getConfirm']);
     Route::post('/mypage/profile/passwordSetting', [UserController::class, 'passwordSettingExec']);
+
+    //ログアウト
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+
+    //学習記録
+    Route::post('/lesson/{id}/{post}/study', [StudiesController::class, 'store']);
+    Route::post('/lesson/{id}', [StudiesController::class, 'storeStatus']);
 });
 
 
@@ -121,7 +126,7 @@ Route::group(['middleware' => ['auth:users']], function () {
 | レッスン関連
 |--------------------------------------------------------------------------
 */
-use App\Http\Controllers\StudiesController;
+
 
 //アクセスログ　 URLが/lesson/{id}と認識されるので、かならず//Postより前に記載すること
 Route::post('/lesson/access', [PostsController::class, 'access']);
@@ -133,11 +138,8 @@ Route::get('/lesson', [PostsController::class, 'lesson']);
 Route::get('/lesson/{id}', [PostsController::class, 'lessonshow'])->name('lesson.show');
 
 //レッスンカテゴリー
-Route::get('/lesson/category/{category_id}', [PostsController::class, 'lessoncategory']);
+Route::get('/lesson/category/{category_id}', [PostsController::class, 'lessoncategory'])->name('lessoncategory.show');
 
-//学習記録
-Route::post('/lesson/{id}/{post}/study', [StudiesController::class, 'store']);
-Route::post('/lesson/{id}', [StudiesController::class, 'storeStatus']);
 
 
 /*

@@ -44,7 +44,15 @@ if (Util::ua_app() == true) {
               </ul>
             </div>
           @endif
-          
+
+          @if (session('logout'))
+            <div class="alert alert-danger">
+              <ul>
+                {{ session('logout') }}
+              </ul>
+            </div>
+          @endif
+
           @if (session('flash_info'))
                 <div class="alert alert-danger">
                     <strong><i class="fa fa-info-circle" aria-hidden="true"></i> {{ session('flash_info') }}</strong>
